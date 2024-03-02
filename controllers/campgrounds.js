@@ -1,5 +1,5 @@
 
-const Campground = require('../models/campground')
+const Campground = require('../models/Campground')
 exports.getCampgrounds=async(req,res,next)=>{
     let query;
     const reqQuery = {...req.query};

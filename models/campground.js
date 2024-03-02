@@ -15,5 +15,18 @@ const Campgroundschema = new mongoose.Schema({
     tel: {
         type: String
     },
+},{
+    toJSON: {virtuals:true},
+    toObject:{virtuals:true}
 });
+
+//revere populate with virtual
+Campgroundschema.virtual('appointments',{
+    ref:'Appointment',
+    localField: '_id',
+    foreignField:'campground',
+    justOne:false
+});
+
+
 module.exports = mongoose.model('Campground', Campgroundschema);
