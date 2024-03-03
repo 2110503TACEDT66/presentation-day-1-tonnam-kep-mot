@@ -27,6 +27,11 @@ Campgroundschema.virtual('appointments',{
     foreignField:'campground',
     justOne:false
 });
-
+//cascade delete appt
+Campgroundschema.pre('deleteOne',{document: true,query: false},async function(next){
+    console.log(`Appointment being removed from campground ${this._id}`);
+    await this.model('Appointment').deleteMany({campground:this._id});
+    next();
+});
 
 module.exports = mongoose.model('Campground', Campgroundschema);
