@@ -1,0 +1,86 @@
+@startuml CampgroundClass
+left to right direction
+package "Campground"{
+    class "<<Application>>\nCampground Booking" as CampgroundService{}
+
+    class "<<Resource>>\nCampgrounds" as ResourceCampgrounds{
+        <<GET>> +getCampgrounds():Campground
+        <<POST>> +createCampground():Campground
+    }
+
+    class "<<Resource>>\nCampground" as ResourceCampground {
+        <<GET>> +getCampground(): Campground
+        <<PUT>> +updateCampground(): Campground
+        <<DELETE>> +deleteCampground(): void
+    }
+
+    class "<<Representation>>\nCampground" as RepresentationCampground {
+        -name
+        -address
+        -tel
+        -Booking
+    }
+
+    class "<<Resource>>\nUser" as ResourceUserReg{
+        <<POST>> +register(): Token
+    }
+
+    class "<<Resource>>\nUser" as ResourceUserGetme{
+        <<GET>> +getMe(): User
+    }
+
+    class "<<Resource>>\nUser" as ResourceUserLogin {
+        <<GET>> +login(): void
+    }
+
+    class "<<Resource>>\nUser" as ResourceUserLogout {
+        <<GET>> +logout(): void
+    }
+    
+    class "<<Representation>>\nUser" as RepresentationUser {
+        -name
+        -email
+        -tel
+        -role
+        -password
+        -createdAt
+    }
+
+    class "<<Resource>>\nbookings" as ResourceAppointments{
+        <<GET>> +getBookings(): Booking
+        <<POST>> +addBooking(): Booking
+    }
+
+    class "<<Resource>>\nBooking" as ResourceAppointment {
+        <<GET>> +getBooking(): Booking
+        <<PUT>> +updateBooking(): Booking
+        <<DELETE>> +deleteBooking(): void
+    }
+
+    class "<<Representation>>\nBooking" as RepresentationAppointment {
+        -bookingDate
+        -user
+        -campground
+        -createdBooking
+    }
+
+}
+
+CampgroundService ..> ResourceCampgrounds:"/api/v1/campgrounds\n<<Path>>"
+ResourceCampgrounds ..> ResourceCampground: "/{campgroundId}\n<<Path>>"
+ResourceCampground ..> RepresentationCampground: "<<use>>"
+
+CampgroundService ..> ResourceUserReg:"/api/v1/register\n<<Path>>"
+CampgroundService ..> ResourceUserGetme:"/api/v1/me\n<<Path>>"
+CampgroundService ..> ResourceUserLogin:"/api/v1/login\n<<Path>>"
+CampgroundService ..> ResourceUserLogout:"/api/v1/logout\n<<Path>>"
+ResourceUserReg ..> RepresentationUser: "<<use>>"
+ResourceUserGetme ..> RepresentationUser: "<<use>>"
+ResourceUserLogin ..> RepresentationUser: "<<use>>"
+ResourceUserLogout ..> RepresentationUser: "<<use>>"
+
+CampgroundService ..> ResourceAppointments:"/api/v1/bookings\n<<Path>>"
+ResourceAppointments ..> ResourceAppointment: "/{bookingId}\n<<Path>>"
+ResourceAppointment ..> RepresentationAppointment: "<<use>>"
+@enduml
+

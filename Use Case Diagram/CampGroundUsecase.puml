@@ -1,0 +1,57 @@
+@startuml CampGround System Use Case Diagram
+left to right direction
+actor "User" as user
+actor "Admin" as admin
+rectangle "CampGround System" as CampGroundSystem {    
+    usecase "Register" as register
+    usecase "Log In" as login
+    usecase "Log In (Admin)" as adminLogin
+    usecase "Log Out" as logout
+    usecase "Manage\nCampGround" as manageCampGround
+    usecase "View\nCampGround" as viewCampGround
+    usecase "Delete\nCampGround" as deleteCampGround
+    usecase "Create\nBooking" as createBooking
+    usecase "Manage\nBooking" as manageBooking
+    usecase "View\nBooking" as viewBooking
+    usecase "Delete\nBooking" as deleteBooking
+}
+
+' user -- register
+' user -- login
+' user -- logout
+' user -- createAppt
+' user -- manageAppt
+' user -- viewAppt
+' user -- deleteAppt
+' user -- viewCampGround
+
+user -- register
+user -- login
+register -- login
+login -- logout
+login -- createBooking
+login -- manageBooking
+login -- viewBooking
+login -- deleteBooking
+login -- viewCampGround
+
+' admin -- createAppt
+' admin -- manageAppt
+' admin -- deleteAppt
+' admin -- viewAppt
+
+' admin -- manageDentist
+' admin -- viewDentist
+' admin -- deleteDentist
+
+admin -- adminLogin
+adminLogin -- createBooking
+adminLogin -- manageBooking
+adminLogin -- deleteBooking
+adminLogin -- viewBooking
+
+adminLogin -- manageCampGround
+adminLogin -- viewCampGround
+adminLogin -- deleteCampGround
+
+@enduml

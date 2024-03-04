@@ -16,6 +16,11 @@ match: [
                 'Please add a valid email'
            ]
 },
+tel:{
+    type:String,
+    require:[true,'Please add your telephone number'],
+    unique:true
+},
 role: {
 type:String,
 enum: ['user','admin'],

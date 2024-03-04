@@ -1,0 +1,23 @@
+@startuml Manage CampGround (DELETE)
+
+header CampGround Sequence Diagram
+footer Page %page% of %lastpage%
+title "Manage CampGround (DELETE)"
+
+participant "Client" as client
+participant "<<javaScript>>\n:server" as server
+participant "<<router>>\n:campgrounds" as routerCampGrounds
+participant "<<controllers>>\n:campgrounds" as controllersCampGrounds
+participant "<<model>>\n:CampGround" as modelCampGrounds
+database "<<MongoDB>>\n:campgrounds" as CampGroundsDatabase
+
+client->server ++:req.delete('/:id')
+server->routerCampGrounds ++:app.use('/api/v1/campgrounds',campgrounds)
+routerCampGrounds -> controllersCampGrounds ++:deleteCampGround()
+controllersCampGrounds->modelCampGrounds ++:findByIdAndDelete(req.params.id)
+modelCampGrounds ->CampGroundsDatabase ++:CampGroundSchema
+CampGroundsDatabase --> modelCampGrounds --:campground
+controllersCampGrounds <-- modelCampGrounds --:campground
+controllersCampGrounds->client --:response
+
+@enduml
