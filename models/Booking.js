@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const BookingSchema = new mongoose.Schema({
-    bookingData: {
+    bookingDate: {
         type:Date,
         required:true
     },
@@ -11,7 +11,7 @@ const BookingSchema = new mongoose.Schema({
     },
     campground:{
         type:mongoose.Schema.ObjectId,
-        ref:'campground',
+        ref:'Campground',
         required:true
     },
     createdBooking:{

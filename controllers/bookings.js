@@ -110,7 +110,7 @@ exports.updateBooking = async (req, res, next) =>{
     try{
         let booking = await Booking.findById(req.params.id);
         if(!booking){
-            return res.status (404).json({success:false,message: `No campground with the id of ${req.params.id}` }); 
+            return res.status (404).json({success:false,message: `No booking with the id of ${req.params.id}` }); 
         }
 
         if(booking.user.toString()!==req.user.id && req.user.role !== 'admin'){
