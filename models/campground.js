@@ -21,16 +21,16 @@ const Campgroundschema = new mongoose.Schema({
 });
 
 //revere populate with virtual
-Campgroundschema.virtual('appointments',{
-    ref:'Appointment',
+Campgroundschema.virtual('bookings',{
+    ref:'Booking',
     localField: '_id',
     foreignField:'campground',
     justOne:false
 });
 //cascade delete appt
 Campgroundschema.pre('deleteOne',{document: true,query: false},async function(next){
-    console.log(`Appointment being removed from campground ${this._id}`);
-    await this.model('Appointment').deleteMany({campground:this._id});
+    console.log(`Booking being removed from campground ${this._id}`);
+    await this.model('Booking').deleteMany({campground:this._id});
     next();
 });
 

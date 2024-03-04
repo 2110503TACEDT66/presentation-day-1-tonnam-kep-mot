@@ -8,7 +8,7 @@ exports.getCampgrounds=async(req,res,next)=>{
     console.log(reqQuery);
         let queryStr = JSON.stringify(reqQuery);
         queryStr=queryStr.replace(/\b(gt|gte|lt|lte|in)\b/g,match=>`$${match}`);
-        query=Campground.find(JSON.parse(queryStr)).populate('appointments');
+        query=Campground.find(JSON.parse(queryStr)).populate('bookings');
         if(req.query.select){
             const fields=req.query.select.split(',').join(' ');
             query=query.select(fields);

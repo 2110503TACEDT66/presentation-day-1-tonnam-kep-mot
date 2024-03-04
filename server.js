@@ -3,7 +3,7 @@ const dotenv = require('dotenv');
 const cookieParser=require('cookie-parser');
 const connectDB = require('./config/db')
 const campgrounds = require ('./routes/campgrounds');
-const appointments = require('./routes/appointments');
+const bookings = require('./routes/bookings');
 const auth = require('./routes/auth');
 dotenv.config({path:'./config/config.env'});
 connectDB();
@@ -11,7 +11,7 @@ const app = express();
 app.use(express.json());
 app.use(cookieParser());
 app.use('/api/v1/campgrounds',campgrounds);
-app.use('/api/v1/appointments', appointments);
+app.use('/api/v1/bookings', bookings);
 app.use('/api/v1/auth',auth);
 const PORT=process.env.PORT || 7777;
 const server = app.listen(PORT, console.log('Server running in ', process.env.NODE_ENV,' Mode on port ',PORT));
