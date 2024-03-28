@@ -5,7 +5,7 @@ exports.getCampgrounds=async(req,res,next)=>{
     const reqQuery = {...req.query};
     const removeFields = ['select','sort','page','limit'];
     removeFields.forEach(param=>delete reqQuery[param]);
-    console.log(reqQuery);
+    console.log(reqQuery,"qqq");
         let queryStr = JSON.stringify(reqQuery);
         queryStr=queryStr.replace(/\b(gt|gte|lt|lte|in)\b/g,match=>`$${match}`);
         query=Campground.find(JSON.parse(queryStr)).populate('bookings');
@@ -38,7 +38,7 @@ exports.getCampgrounds=async(req,res,next)=>{
             }
         }
     try{
-        console.log(req.query)
+        console.log(req.query,"111")
         res.status(200).json({success:true, count: campgrounds.length, pagination, data:campgrounds});
     } catch(err){
         res.status(400).json({success:false});

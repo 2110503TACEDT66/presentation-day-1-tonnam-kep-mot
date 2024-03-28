@@ -72,8 +72,9 @@ exports.getBooking = async (req, res, next) => {
     }
 };
 exports.addBooking = async (req, res, next) => {
+
     try {
-        
+        console.log('aaaaa',req.body)
         req.body.campground=req.params.campgroundId;
         
         const campground = await Campground.findById(req.params.campgroundId);
