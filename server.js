@@ -26,9 +26,8 @@ app.use(cookieParser());
 app.use(mongoSanitize());
 app.use(helmet());
 app.use(xss());
-// app.use(limiter);
+app.use(limiter);
 app.use(hpp());
-app.use(cors());
 
 app.use('/api/v1/campgrounds',campgrounds);
 app.use('/api/v1/bookings', bookings);
@@ -36,7 +35,11 @@ app.use('/api/v1/auth',auth);
 
 
 const PORT=process.env.PORT || 7777;
-const server = app.listen(PORT, console.log('Server running in ', process.env.NODE_ENV,' Mode on port ',PORT));
+const server = app.listen(
+    PORT, 
+    console.log('Server running in ', process.env.NODE_ENV,
+    "on" + process.env.HOST + ":" + PORT));
+
 process.on('unhandleRejection',(err,promise)=>{
     console.log(`Error: ${err.message}`);
     server.close(()=>process.exit(1));
